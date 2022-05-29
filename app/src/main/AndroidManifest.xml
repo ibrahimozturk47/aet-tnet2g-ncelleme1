@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Etütnet">
         <activity
-            android:name=".Anasayfaactivity"
+            android:name=".MainActivity2"
             android:exported="false" />
         <activity
             android:name=".SpashScreen"
