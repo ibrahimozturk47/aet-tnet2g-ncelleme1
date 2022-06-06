@@ -17,7 +17,7 @@
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="80dp"
+        android:textSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -25,22 +25,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="320dp"
-        android:layout_height="5dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/süreyazısiyah"
-        app:layout_constraintVertical_bias="0.003" />
-
     <Button
         android:id="@+id/cıkısbuton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
@@ -51,23 +39,9 @@
 
 
     <Button
-        android:id="@+id/artıbuton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="#00FFFFFF"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/artıresim"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/anahtarbuton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="84dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
@@ -78,8 +52,8 @@
 
     <ImageView
         android:id="@+id/baslatresimsiyah"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,10 +61,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/baslasiyah" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView2"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.252"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/sure2" />
+
+
     <Button
         android:id="@+id/basladurbuton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/durdurmaresimsiyah"
@@ -102,8 +92,8 @@
 
     <Button
         android:id="@+id/butonseçim"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/seçimresim"
@@ -114,8 +104,8 @@
 
     <ImageView
         android:id="@+id/seçimresim"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="28dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,8 +117,8 @@
 
     <ImageView
         android:id="@+id/durdurmaresimsiyah"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="24dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -139,8 +129,8 @@
 
     <Button
         android:id="@+id/butonsıfırla"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/sıfırlaresim"
@@ -153,8 +143,8 @@
 
     <ImageView
         android:id="@+id/sıfırlaresim"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,54 +155,31 @@
 
     <ImageView
         android:id="@+id/temasiyahresim"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/colopalette" />
 
-    <ImageView
-        android:id="@+id/hesapmakinesiresim"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/calculator" />
-
     <Button
         android:id="@+id/temabutonsiyah"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="#00FFFFFF"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/butonhesapmakinesi"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/cıkısresimsiyah"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
@@ -220,33 +187,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/checklist" />
 
-    <ImageView
-        android:id="@+id/artıresim"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plus" />
 
-    <ImageView
-        android:id="@+id/eksiresim"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.969"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/incorrect" />
+
+
 
     <ImageView
         android:id="@+id/anahtarsiyahresim"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="84dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -256,8 +204,8 @@
         app:srcCompat="@drawable/padlocksiyah" />
     <ImageView
         android:id="@+id/anahtarbeyazresim"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="84dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"

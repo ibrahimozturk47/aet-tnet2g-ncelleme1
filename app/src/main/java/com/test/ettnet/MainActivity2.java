@@ -1,9 +1,11 @@
 package com.test.ettnet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -23,8 +25,10 @@ public class MainActivity2 extends AppCompatActivity {
     private ArrayAdapter<String> itemAdapter;
     private ArrayList<String> items;
     private ListView listview;
-    private Button button,cıkısbuton2;
-    private ImageView cıkısresim2;
+    ConstraintLayout arkaplan2;
+    private Button button,cıkısbuton2,temabutonsiyah2;
+    private ImageView cıkısresim2,temaresimsiyah2;
+    private long renk2=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,34 @@ public class MainActivity2 extends AppCompatActivity {
         button=findViewById(R.id.button);
         cıkısbuton2=findViewById(R.id.cıkısbuton2);
         cıkısresim2=findViewById(R.id.cıkısresimsiyah2);
+        temabutonsiyah2=findViewById(R.id.temabutonsiyah2);
+        temaresimsiyah2=findViewById(R.id.temasiyahresim2);
+
+        temabutonsiyah2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (renk2==0){
+                    renk2+=1;
+                    arkaplan2.setBackgroundResource(R.drawable.yenipurple);
+                }else if (renk2==1){
+                    renk2+=1;
+                    arkaplan2.setBackgroundResource(R.drawable.yenipurple);
+                }else if (renk2==2){
+                    renk2+=1;
+                    arkaplan2.setBackgroundResource(R.drawable.yeniblue);
+                }else if (renk2==3){
+                    renk2+=1;
+                    arkaplan2.setBackgroundResource(R.drawable.yenigreen);
+                }else if (renk2==4){
+                    renk2+=1;
+                    arkaplan2.setBackgroundResource(R.drawable.yenired);
+
+                }else if (renk2==5){
+                    renk2=0;
+                    arkaplan2.setBackgroundColor(Color.TRANSPARENT);
+                }
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +115,6 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
     }
+
 
 }

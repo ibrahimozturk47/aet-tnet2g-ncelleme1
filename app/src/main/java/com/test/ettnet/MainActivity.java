@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.opengl.Visibility;
@@ -18,16 +19,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static long surem = 1200000;
-    private static long aram = 1200000;
+    private static long surem = 10000;
     TextView suresiyah;
+    LottieAnimationView animasyon2;
     ConstraintLayout arkaplan;
-    private Button butonbasladur,anahtarbuton,hesapmakinesibuton, butonsıfırla,butonseçim,temabutonsiyah,cıkısbuton,artıbuton;
+    private Button butonbasladur,anahtarbuton, butonsıfırla,butonseçim,temabutonsiyah,cıkısbuton;
     private ImageView baslaresimsiyah, durdurresimsiyah,anahtarsiyahresim,anahtarbeyazresim,
-            sıfırlaresimisiyah,süreresimsiyah,temasiyahresim,cıkısresimsiyah,secimresim,hesapmakinesiresim,artıresim,eksiresim;
+            sıfırlaresimisiyah,süreresimsiyah,temasiyahresim,cıkısresimsiyah,secimresim;
     private CountDownTimer pomodoro;
     private long renk;
     private boolean geçensure,artısecim,anahtarsecim;
@@ -43,16 +46,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         butonbasladur = findViewById(R.id.basladurbuton);
         butonsıfırla = findViewById(R.id.butonsıfırla);
+        animasyon2=findViewById(R.id.animationView2);
         baslaresimsiyah = findViewById(R.id.baslatresimsiyah);
         secimresim=findViewById(R.id.seçimresim);
-        artıbuton=findViewById(R.id.artıbuton);
-        artıresim=findViewById(R.id.artıresim);
-        eksiresim=findViewById(R.id.eksiresim);
         anahtarbeyazresim=findViewById(R.id.anahtarbeyazresim);
         anahtarbuton=findViewById(R.id.anahtarbuton);
         anahtarsiyahresim=findViewById(R.id.anahtarsiyahresim);
-        hesapmakinesibuton=findViewById(R.id.butonhesapmakinesi);
-        hesapmakinesiresim=findViewById(R.id.hesapmakinesiresim);
         arkaplan=findViewById(R.id.arkaplana);
         durdurresimsiyah = findViewById(R.id.durdurmaresimsiyah);
         sıfırlaresimisiyah = findViewById(R.id.sıfırlaresim);
@@ -64,17 +63,15 @@ public class MainActivity extends AppCompatActivity {
         suresiyah = findViewById(R.id.süreyazısiyah);
         durdurresimsiyah.setVisibility(View.INVISIBLE);
         baslaresimsiyah.setVisibility(View.VISIBLE);
-        eksiresim.setVisibility(View.INVISIBLE);
+        anahtarbuton.setVisibility(View.INVISIBLE);
+        anahtarbeyazresim.setVisibility(View.INVISIBLE);
         final MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.beep);
         arkaplan.setBackgroundColor(Color.TRANSPARENT);
 
         Intent gelenintenti=getIntent();
-        hesapmakinesibuton.setVisibility(View.INVISIBLE);
-        hesapmakinesiresim.setVisibility(View.INVISIBLE);
-        temasiyahresim.setVisibility(View.INVISIBLE);
-        temabutonsiyah.setVisibility(View.INVISIBLE);
-        anahtarbuton.setVisibility(View.INVISIBLE);
-        anahtarbeyazresim.setVisibility(View.INVISIBLE);
+        temasiyahresim.setVisibility(View.VISIBLE);
+        temabutonsiyah.setVisibility(View.VISIBLE);
+        animasyon2.setVisibility(View.INVISIBLE);
         butonbasladur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     geçensure = false;
                     baslaresimsiyah.setVisibility(View.VISIBLE);
                     anahtarbuton.setVisibility(View.INVISIBLE);
+                    animasyon2.setVisibility(View.INVISIBLE);
                     anahtarbeyazresim.setVisibility(View.INVISIBLE);
                     durdurresimsiyah.setVisibility(View.INVISIBLE);
                     butonsıfırla.setVisibility(View.VISIBLE);
@@ -108,11 +106,12 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFinish() {
                             geçensure = false;
-                            baslaresimsiyah.setVisibility(View.VISIBLE);
+                            baslaresimsiyah.setVisibility(View.INVISIBLE);
                             durdurresimsiyah.setVisibility(View.INVISIBLE);
                             butonbasladur.setVisibility(View.INVISIBLE);
                             suresiyah.setTextColor(Color.parseColor("#00ff00"));
                             butonsıfırla.setVisibility(View.VISIBLE);
+                            animasyon2.setVisibility(View.INVISIBLE);
                             mediaPlayer.start();
                         }
                     }.start();
@@ -121,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     durdurresimsiyah.setVisibility(View.VISIBLE);
                     anahtarbuton.setVisibility(View.VISIBLE);
                     anahtarbeyazresim.setVisibility(View.VISIBLE);
+                    animasyon2.setVisibility(View.VISIBLE);
                     butonsıfırla.setVisibility(View.INVISIBLE);
                     suresiyah.setTextColor(Color.parseColor("#FF0000"));
 
@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 String geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
                 suresiyah.setText(geçen);
                 butonbasladur.setVisibility(View.VISIBLE);
+                baslaresimsiyah.setVisibility(View.VISIBLE);
                 suresiyah.setTextColor(Color.parseColor("#000000"));
 
             }
@@ -181,19 +182,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (renk==0){
                     renk+=1;
-                    arkaplan.setBackgroundColor(Color.YELLOW);
+                    arkaplan.setBackgroundResource(R.drawable.yenipurple);
                 }else if (renk==1){
                     renk+=1;
-                    arkaplan.setBackgroundColor(Color.CYAN);
+                    arkaplan.setBackgroundResource(R.drawable.yenipurple);
                 }else if (renk==2){
                     renk+=1;
-                    arkaplan.setBackgroundColor(Color.LTGRAY);
+                    arkaplan.setBackgroundResource(R.drawable.yeniblue);
                 }else if (renk==3){
                     renk+=1;
-                    arkaplan.setBackgroundColor(Color.WHITE);
+                    arkaplan.setBackgroundResource(R.drawable.yenigreen);
                 }else if (renk==4){
                     renk+=1;
-                    arkaplan.setBackgroundColor(Color.GRAY);
+                    arkaplan.setBackgroundResource(R.drawable.yenired);
 
                 }else if (renk==5){
                     renk=0;
@@ -211,35 +212,8 @@ cıkısbuton.setOnClickListener(new View.OnClickListener() {
 
     }
 });
-hesapmakinesibuton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
 
-    }
-});
-artıbuton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(artısecim==true){
-            hesapmakinesibuton.setVisibility(View.INVISIBLE);
-            hesapmakinesiresim.setVisibility(View.INVISIBLE);
-            temasiyahresim.setVisibility(View.INVISIBLE);
-            temabutonsiyah.setVisibility(View.INVISIBLE);
-            artıresim.setVisibility(View.VISIBLE);
-            eksiresim.setVisibility(View.INVISIBLE);
-            artısecim=false;
 
-        }else{
-            hesapmakinesibuton.setVisibility(View.VISIBLE);
-            hesapmakinesiresim.setVisibility(View.VISIBLE);
-            temasiyahresim.setVisibility(View.VISIBLE);
-            temabutonsiyah.setVisibility(View.VISIBLE);
-            eksiresim.setVisibility(View.VISIBLE);
-            artıresim.setVisibility(View.INVISIBLE);
-            artısecim=true;
-        }
-    }
-});
 anahtarbuton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -252,14 +226,9 @@ anahtarbuton.setOnClickListener(new View.OnClickListener() {
             secimresim.setVisibility(View.INVISIBLE);
             cıkısresimsiyah.setVisibility(View.INVISIBLE);
             cıkısbuton.setVisibility(View.INVISIBLE);
-            artıbuton.setVisibility(View.INVISIBLE);
-            artıresim.setVisibility(View.INVISIBLE);
             butonbasladur.setVisibility(View.INVISIBLE);
             anahtarbeyazresim.setVisibility(View.INVISIBLE);
             anahtarsiyahresim.setVisibility(View.VISIBLE);
-            if (artısecim==false){
-                artısecim=true;
-            }
 
 
         }else if(anahtarsecim==false) {
@@ -270,8 +239,6 @@ anahtarbuton.setOnClickListener(new View.OnClickListener() {
             cıkısresimsiyah.setVisibility(View.VISIBLE);
             cıkısbuton.setVisibility(View.VISIBLE);
             butonsıfırla.setVisibility(View.VISIBLE);
-            artıbuton.setVisibility(View.VISIBLE);
-            artıresim.setVisibility(View.VISIBLE);
             anahtarsiyahresim.setVisibility(View.INVISIBLE);
             anahtarbeyazresim.setVisibility(View.VISIBLE);
             butonbasladur.setVisibility(View.VISIBLE);
