@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -18,17 +19,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
-    private ArrayAdapter<String> itemAdapter;
-    private ArrayList<String> items;
+    ArrayAdapter<String> itemAdapter;
+    ArrayList<String> items;
     private ListView listview;
     ConstraintLayout arkaplan2;
-    private Button button,cıkısbuton2,temabutonsiyah2;
-    private ImageView cıkısresim2,temaresimsiyah2;
-    private long renk2=0;
+    private Button button,cıkısbuton2;
+    private ImageView cıkısresim2;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private EditText input;
+    private String isimal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,39 +50,17 @@ public class MainActivity2 extends AppCompatActivity {
         button=findViewById(R.id.button);
         cıkısbuton2=findViewById(R.id.cıkısbuton2);
         cıkısresim2=findViewById(R.id.cıkısresimsiyah2);
-        temabutonsiyah2=findViewById(R.id.temabutonsiyah2);
-        temaresimsiyah2=findViewById(R.id.temasiyahresim2);
+        input=findViewById(R.id.editTextTextPersonName);
 
-        temabutonsiyah2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (renk2==0){
-                    renk2+=1;
-                    arkaplan2.setBackgroundResource(R.drawable.yenipurple);
-                }else if (renk2==1){
-                    renk2+=1;
-                    arkaplan2.setBackgroundResource(R.drawable.yenipurple);
-                }else if (renk2==2){
-                    renk2+=1;
-                    arkaplan2.setBackgroundResource(R.drawable.yeniblue);
-                }else if (renk2==3){
-                    renk2+=1;
-                    arkaplan2.setBackgroundResource(R.drawable.yenigreen);
-                }else if (renk2==4){
-                    renk2+=1;
-                    arkaplan2.setBackgroundResource(R.drawable.yenired);
 
-                }else if (renk2==5){
-                    renk2=0;
-                    arkaplan2.setBackgroundColor(Color.TRANSPARENT);
-                }
-            }
-        });
-
+        //aktiviteyükle();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addItem(view);
+                //Aktivitekaydet();
+
+
             }
         });
         cıkısbuton2.setOnClickListener(new View.OnClickListener() {
@@ -105,16 +92,44 @@ public class MainActivity2 extends AppCompatActivity {
 
 
     private void addItem(View view ){
-        EditText input=findViewById(R.id.editTextTextPersonName);
         String itemtext=input.getText().toString();
+        //Aktivitekaydet();
         if (!(itemtext.equals(""))){
             itemAdapter.add(itemtext);
             input.setText("");
+
+
+           Toast.makeText(this, "Aktivite kaydedildi", Toast.LENGTH_SHORT).show();
+
         }else{
             Toast.makeText(this, "Bir aktivite ekleyin", Toast.LENGTH_SHORT).show();
         }
 
     }
+    private void Aktivitekaydet(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(items);
+        editor.putString("task list",json);
+        editor.apply();
+
+    }
+    private void aktiviteyükle(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
+        Gson gson=new Gson();
+        String json=sharedPreferences.getString("task list",null);
+        Type type=new TypeToken<ArrayList<String>>() {}.getType();
+        items=gson.fromJson(json,type);
+        if (items==null){
+            items=new ArrayList<>();
+        }
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
 
 
 }

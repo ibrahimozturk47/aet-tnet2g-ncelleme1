@@ -1,9 +1,13 @@
 package com.test.ettnet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -26,7 +30,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private static long surem = 10000;
     TextView suresiyah;
-    LottieAnimationView animasyon2;
+    LottieAnimationView animasyon2,animasyon3;
     ConstraintLayout arkaplan;
     private Button butonbasladur,anahtarbuton, butonsıfırla,butonseçim,temabutonsiyah,cıkısbuton;
     private ImageView baslaresimsiyah, durdurresimsiyah,anahtarsiyahresim,anahtarbeyazresim,
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private long renk;
     private boolean geçensure,artısecim,anahtarsecim;
     private long saniye = surem;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    String geçen;
+
 
 
     @Override
@@ -44,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         butonbasladur = findViewById(R.id.basladurbuton);
         butonsıfırla = findViewById(R.id.butonsıfırla);
         animasyon2=findViewById(R.id.animationView2);
+        animasyon3=findViewById(R.id.animationView3);
         baslaresimsiyah = findViewById(R.id.baslatresimsiyah);
         secimresim=findViewById(R.id.seçimresim);
         anahtarbeyazresim=findViewById(R.id.anahtarbeyazresim);
@@ -72,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         temasiyahresim.setVisibility(View.VISIBLE);
         temabutonsiyah.setVisibility(View.VISIBLE);
         animasyon2.setVisibility(View.INVISIBLE);
+
+       // preferences=this.getSharedPreferences("com.test.ettnet", Context.MODE_PRIVATE);
+        //geçen=preferences.getString("itemtext",null);
+        //suresiyah.setText(geçen);
+
+
+
         butonbasladur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,8 +101,19 @@ public class MainActivity extends AppCompatActivity {
                     animasyon2.setVisibility(View.INVISIBLE);
                     anahtarbeyazresim.setVisibility(View.INVISIBLE);
                     durdurresimsiyah.setVisibility(View.INVISIBLE);
-                    butonsıfırla.setVisibility(View.VISIBLE);
+                    //if (anahtarsecim&&!geçensure){
+
+                    //butonsıfırla.setVisibility(View.INVISIBLE);
+                       // sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
+                    //}else if(!anahtarsecim &&geçensure){
+                        butonsıfırla.setVisibility(View.VISIBLE);
+                        sıfırlaresimisiyah.setVisibility(View.VISIBLE);
+                   // }
                     suresiyah.setTextColor(Color.parseColor("#000000"));
+                    animasyon3.setVisibility(View.INVISIBLE);
+                    //editor=preferences.edit();
+                    //editor.putString("itemtext",geçen);
+                    //editor.apply();
 
                 } else {
                     //başlama
@@ -96,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
 
                             int dakikam = (int) (saniye / 1000 / 60);
                             int saniyem = (int) (saniye / 1000) % 60;
-                            String geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
+                             geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
                             suresiyah.setText(geçen);
+
 
 
 
@@ -110,9 +139,18 @@ public class MainActivity extends AppCompatActivity {
                             durdurresimsiyah.setVisibility(View.INVISIBLE);
                             butonbasladur.setVisibility(View.INVISIBLE);
                             suresiyah.setTextColor(Color.parseColor("#00ff00"));
-                            butonsıfırla.setVisibility(View.VISIBLE);
+                            if (anahtarsecim){
+                                butonsıfırla.setVisibility(View.INVISIBLE);
+                                sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
+                            }else if(!anahtarsecim){
+                                butonsıfırla.setVisibility(View.VISIBLE);
+                                sıfırlaresimisiyah.setVisibility(View.VISIBLE);
+                            }
+
+
                             animasyon2.setVisibility(View.INVISIBLE);
                             mediaPlayer.start();
+                            animasyon3.setVisibility(View.VISIBLE);
                         }
                     }.start();
                     geçensure = true;
@@ -122,12 +160,15 @@ public class MainActivity extends AppCompatActivity {
                     anahtarbeyazresim.setVisibility(View.VISIBLE);
                     animasyon2.setVisibility(View.VISIBLE);
                     butonsıfırla.setVisibility(View.INVISIBLE);
+                    sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
                     suresiyah.setTextColor(Color.parseColor("#FF0000"));
+                    animasyon3.setVisibility(View.INVISIBLE);
 
 
                 }
             }
         });
+
 
         butonsıfırla.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,11 +178,13 @@ public class MainActivity extends AppCompatActivity {
 
                 int dakikam = (int) (saniye / 1000 / 60);
                 int saniyem = (int) (saniye / 1000) % 60;
-                String geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
+                 geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
                 suresiyah.setText(geçen);
                 butonbasladur.setVisibility(View.VISIBLE);
                 baslaresimsiyah.setVisibility(View.VISIBLE);
+                durdurresimsiyah.setVisibility(View.INVISIBLE);
                 suresiyah.setTextColor(Color.parseColor("#000000"));
+                animasyon3.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -166,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int dakikam = (int) (saniye / 1000 / 60);
                 int saniyem = (int) (saniye / 1000) % 60;
-                String geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
+                 geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
                 suresiyah.setText(geçen);
             }
 
@@ -174,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         });
         int dakikam = (int) (saniye / 1000 / 60);
         int saniyem = (int) (saniye / 1000) % 60;
-        String geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
+        geçen = String.format(Locale.getDefault(), "%02d:%02d", dakikam, saniyem);
         suresiyah.setText(geçen);
 
         temabutonsiyah.setOnClickListener(new View.OnClickListener() {
@@ -217,11 +260,13 @@ cıkısbuton.setOnClickListener(new View.OnClickListener() {
 anahtarbuton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        if(anahtarsecim==true&&geçensure==true){
-            anahtarsecim=false;
+        if(!anahtarsecim&&geçensure){
+            anahtarsecim=true;
 
             durdurresimsiyah.setVisibility(View.INVISIBLE);
             sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
+            temasiyahresim.setVisibility(View.INVISIBLE);
+            temabutonsiyah.setVisibility(View.INVISIBLE);
             butonsıfırla.setVisibility(View.INVISIBLE);
             secimresim.setVisibility(View.INVISIBLE);
             cıkısresimsiyah.setVisibility(View.INVISIBLE);
@@ -231,21 +276,38 @@ anahtarbuton.setOnClickListener(new View.OnClickListener() {
             anahtarsiyahresim.setVisibility(View.VISIBLE);
 
 
-        }else if(anahtarsecim==false) {
-            anahtarsecim=true;
-            durdurresimsiyah.setVisibility(View.VISIBLE);
-            sıfırlaresimisiyah.setVisibility(View.VISIBLE);
+        }else if(anahtarsecim) {
+            anahtarsecim=false;
+
+            //sıfırlaresimisiyah.setVisibility(View.VISIBLE);
+            temasiyahresim.setVisibility(View.VISIBLE);
+            temabutonsiyah.setVisibility(View.VISIBLE);
             secimresim.setVisibility(View.VISIBLE);
             cıkısresimsiyah.setVisibility(View.VISIBLE);
             cıkısbuton.setVisibility(View.VISIBLE);
             butonsıfırla.setVisibility(View.VISIBLE);
+            sıfırlaresimisiyah.setVisibility(View.VISIBLE);
             anahtarsiyahresim.setVisibility(View.INVISIBLE);
             anahtarbeyazresim.setVisibility(View.VISIBLE);
+            if (geçensure){
             butonbasladur.setVisibility(View.VISIBLE);
+            durdurresimsiyah.setVisibility(View.VISIBLE);
+            sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
+            butonsıfırla.setVisibility(View.INVISIBLE);
+        }else if(!geçensure){
+                butonbasladur.setVisibility(View.INVISIBLE);
+                durdurresimsiyah.setVisibility(View.INVISIBLE);
+                sıfırlaresimisiyah.setVisibility(View.VISIBLE);
+                butonsıfırla.setVisibility(View.VISIBLE);
+            }
         }
     }
 });
 
+
+
     }
+
+
 
 }
