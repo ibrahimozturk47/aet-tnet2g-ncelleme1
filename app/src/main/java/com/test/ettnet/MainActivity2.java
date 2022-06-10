@@ -88,6 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
 
@@ -110,7 +111,7 @@ public class MainActivity2 extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         Gson gson=new Gson();
-        String json=gson.toJson(items);
+        String json=gson.toJson(itemAdapter);
         editor.putString("task list",json);
         editor.apply();
 
@@ -119,11 +120,8 @@ public class MainActivity2 extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         Gson gson=new Gson();
         String json=sharedPreferences.getString("task list",null);
-        Type type=new TypeToken<ArrayList<String>>() {}.getType();
-        items=gson.fromJson(json,type);
-        if (items==null){
-            items=new ArrayList<>();
-        }
+        Type type=new TypeToken<ArrayAdapter<String>>() {}.getType();
+        itemAdapter=gson.fromJson(json,type);
         Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
 
 

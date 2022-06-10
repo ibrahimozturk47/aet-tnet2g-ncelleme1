@@ -3,7 +3,10 @@ package com.test.ettnet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     String geçen;
+    NotificationManager notificationManager;
+
 
 
 
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         anahtarbeyazresim.setVisibility(View.INVISIBLE);
         final MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.beep);
         arkaplan.setBackgroundColor(Color.TRANSPARENT);
+        notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent gelenintenti=getIntent();
         temasiyahresim.setVisibility(View.VISIBLE);
@@ -150,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                             animasyon2.setVisibility(View.INVISIBLE);
                             mediaPlayer.start();
+                            createNotification();
                             animasyon3.setVisibility(View.VISIBLE);
                         }
                     }.start();
@@ -163,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
                     sıfırlaresimisiyah.setVisibility(View.INVISIBLE);
                     suresiyah.setTextColor(Color.parseColor("#FF0000"));
                     animasyon3.setVisibility(View.INVISIBLE);
-
 
                 }
             }
@@ -195,7 +201,10 @@ public class MainActivity extends AppCompatActivity {
         butonseçim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (saniye ==1200000) {
+                if (saniye==10000){
+                    saniye=1200000;
+                }
+                else if (saniye ==1200000) {
                     saniye =1800000;
                 } else if (saniye==1800000){
                     saniye=3600000;
@@ -205,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 }else if (saniye==5400000){
                     saniye=7200000;
                 }else if (saniye==7200000){
-                    saniye=1200000;
+                    saniye=10000;
                 }
                 int dakikam = (int) (saniye / 1000 / 60);
                 int saniyem = (int) (saniye / 1000) % 60;
@@ -228,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     arkaplan.setBackgroundResource(R.drawable.yenipurple);
                 }else if (renk==1){
                     renk+=1;
-                    arkaplan.setBackgroundResource(R.drawable.yenipurple);
+                    arkaplan.setBackgroundResource(R.drawable.yenigri);
                 }else if (renk==2){
                     renk+=1;
                     arkaplan.setBackgroundResource(R.drawable.yeniblue);
@@ -308,6 +317,20 @@ anahtarbuton.setOnClickListener(new View.OnClickListener() {
 
     }
 
+
+    private void createNotification() {
+        String channelId="channel_id";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel=new NotificationChannel(channelId,"example channel",NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+            NotificationCompat.Builder builder=new NotificationCompat.Builder(this,channelId)
+                    .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
+                    .setContentTitle("ETÜTNET")
+                    .setContentText("Sayaç bitti...");
+            notificationManager.notify(1,builder.build());
+        }
+
+    }
 
 
 }
